@@ -1,0 +1,53 @@
+{
+  "collegeCourses": [
+    { "code": "BSCS", "name": "BS Computer Science", "commission": "CHED" },
+    { "code": "BSIT", "name": "BS Information Technology", "commission": "CHED" },
+    { "code": "BSEE", "name": "BS Electrical Engineering", "commission": "CHED" },
+    { "code": "BSA", "name": "BS Accountancy", "commission": "CHED" }
+  ],
+  "shsTracks": [
+    {
+      "code": "acad",
+      "name": "Academic Track",
+      "strands": [
+        { "code": "stem", "name": "STEM" },
+        { "code": "abm", "name": "Accountancy, Business and Management" },
+        { "code": "humss", "name": "Humanities and Social Sciences" },
+        { "code": "gas", "name": "General Academic Strand" }
+      ]
+    },
+    {
+      "code": "techvoc",
+      "name": "Technical-Vocational-Livelihood",
+      "strands": [
+        { "code": "ict", "name": "Information and Communications Technology" },
+        { "code": "he", "name": "Home Economics" },
+        { "code": "ia", "name": "Industrial Arts" },
+        { "code": "agri", "name": "Agri-Fishery" }
+      ]
+    },
+    {
+      "code": "arts",
+      "name": "Arts and Design",
+      "strands": []
+    },
+    {
+      "code": "sports",
+      "name": "Sports Track",
+      "strands": []
+    }
+  ],
+  "tesdaQualifications": [
+    {
+      "code": "ICT211203",
+      "name": "Computer Systems Servicing NC II",
+      "status": "active"
+    },
+    {
+      "code": "ELC311202",
+      "name": "Electrical Installation & Maintenance NC III",
+      "status": "active"
+    }
+  ]
+}
+

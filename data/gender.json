@@ -1,0 +1,21 @@
+{
+  "sexOptions": [
+    { "code": "F", "label": "Female" },
+    { "code": "M", "label": "Male" },
+    { "code": "I", "label": "Intersex" }
+  ],
+  "genderIdentities": [
+    { "code": "woman", "label": "Woman" },
+    { "code": "man", "label": "Man" },
+    { "code": "trans_woman", "label": "Trans Woman" },
+    { "code": "trans_man", "label": "Trans Man" },
+    { "code": "non_binary", "label": "Non-binary" },
+    { "code": "genderqueer", "label": "Genderqueer" },
+    { "code": "prefer_not_to_say", "label": "Prefer not to say" }
+  ],
+  "notes": [
+    "List compiled from Philippine government and LGBTQIA+ org templates.",
+    "Expand as needed for agency-specific forms."
+  ]
+}
+

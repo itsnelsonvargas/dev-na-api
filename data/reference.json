@@ -1,0 +1,26 @@
+{
+  "civilStatuses": ["Single", "Married", "Widowed", "Separated", "Annulled"],
+  "nationalities": [
+    "Filipino",
+    "Dual Citizen",
+    "American",
+    "Chinese",
+    "Japanese",
+    "Korean",
+    "Australian"
+  ],
+  "employmentTypes": [
+    "Full-time",
+    "Part-time",
+    "Contractual",
+    "Project-based",
+    "Internship",
+    "Self-employed"
+  ],
+  "governmentDropdowns": {
+    "idTypes": ["PhilID", "Passport", "SSS ID", "UMID", "Driver's License"],
+    "agencyCodes": ["DICT", "DOH", "DepEd", "CHED", "TESDA", "DOLE"],
+    "incomeClasses": ["Low", "Lower-Middle", "Upper-Middle", "High"]
+  }
+}
+

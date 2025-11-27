@@ -1,0 +1,9 @@
+[
+  { "code": "single", "label": "Single" },
+  { "code": "married", "label": "Married" },
+  { "code": "separated", "label": "Legally Separated" },
+  { "code": "widowed", "label": "Widowed" },
+  { "code": "annulled", "label": "Marriage Annulled" },
+  { "code": "domestic_partnership", "label": "Domestic Partnership" }
+]
+

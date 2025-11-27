@@ -1,0 +1,62 @@
+{
+  "regions": [
+    { "code": "01", "name": "Ilocos Region", "islandGroup": "Luzon" },
+    { "code": "13", "name": "National Capital Region", "islandGroup": "Luzon" },
+    { "code": "11", "name": "Davao Region", "islandGroup": "Mindanao" }
+  ],
+  "provinces": [
+    { "code": "0128", "name": "Ilocos Norte", "regionCode": "01" },
+    { "code": "1339", "name": "Metro Manila", "regionCode": "13" },
+    { "code": "1123", "name": "Davao del Sur", "regionCode": "11" }
+  ],
+  "cities": [
+    {
+      "code": "012801",
+      "name": "Laoag City",
+      "provinceCode": "0128",
+      "regionCode": "01",
+      "type": "component",
+      "isHighlyUrbanized": false
+    },
+    {
+      "code": "133900",
+      "name": "Quezon City",
+      "provinceCode": "1339",
+      "regionCode": "13",
+      "type": "highly urbanized",
+      "isHighlyUrbanized": true
+    },
+    {
+      "code": "112315",
+      "name": "Davao City",
+      "provinceCode": "1123",
+      "regionCode": "11",
+      "type": "highly urbanized",
+      "isHighlyUrbanized": true
+    }
+  ],
+  "barangays": [
+    {
+      "code": "012801001",
+      "name": "Barangay 1 - San Lorenzo",
+      "cityCode": "012801",
+      "provinceCode": "0128",
+      "regionCode": "01"
+    },
+    {
+      "code": "133900001",
+      "name": "Batasan Hills",
+      "cityCode": "133900",
+      "provinceCode": "1339",
+      "regionCode": "13"
+    },
+    {
+      "code": "112315001",
+      "name": "Buhangin",
+      "cityCode": "112315",
+      "provinceCode": "1123",
+      "regionCode": "11"
+    }
+  ]
+}
+

@@ -1,0 +1,23 @@
+{
+  "vaccinationStatuses": [
+    { "code": "fully_vaccinated", "label": "Fully Vaccinated" },
+    { "code": "partially_vaccinated", "label": "Partially Vaccinated" },
+    { "code": "unvaccinated", "label": "Unvaccinated" }
+  ],
+  "philhealthMembershipTypes": [
+    "Formal Economy",
+    "Informal Economy",
+    "Lifetime Member",
+    "Senior Citizen",
+    "Indigent",
+    "Sponsored"
+  ],
+  "medicalConditions": [
+    "Hypertension",
+    "Diabetes",
+    "Asthma",
+    "Pregnancy",
+    "Chronic Kidney Disease"
+  ]
+}
+
