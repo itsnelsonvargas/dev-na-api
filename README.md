@@ -1,74 +1,128 @@
-# developer-na-api
+# WebValuator
 
-Serverless API that gives Philippine developers a single source of truth for commonly requested reference datasets. Built with Next.js 15 App Router, deployed easily on Vercel, and backed by JSON files that can later be swapped for a real database.
+A production-ready web application that allows users to generate an accurate cost estimate for website projects.
 
-## Purpose
-- Centralize PSGC fragments, reference dropdowns, and education lists in one API.
-- Provide a safe suggestion endpoint so visitors can request new datasets.
-- Keep architecture simple (JSON first) but migration-ready for any database.
+## 🛠️ Tech Stack
 
-## Stack
-- Next.js 15 (App Router) + TypeScript
-- Data stored in `/data/*.json`
-- Route logic delegated to `/lib` services for easy re-use
-- Validation powered by Zod on every response and request body
-- Vercel-ready serverless handlers (one folder per endpoint)
+- **Next.js 14** (App Router)
+- **TypeScript**
+- **TailwindCSS**
+- **Shadcn UI** components
+- **Zod** (validation)
+- Deployed on **Vercel**
 
-## Endpoints
-- `GET /api/psgc` – complete PSGC snapshot (regions, provinces, cities, barangays)
-- `GET /api/psgc/regions`
-- `GET /api/psgc/provinces`
-- `GET /api/psgc/cities`
-- `GET /api/psgc/barangays`
-- `GET /api/gender`
-- `GET /api/relationship-statuses`
-- `GET /api/courses`
-- `GET /api/education`
-- `GET /api/reference`
-- `GET /api/health`
-- `POST /api/suggestions`
+## 🚀 Getting Started
 
-All GET endpoints export `revalidate = 3600` for one-hour caching in Vercel’s data cache layer.
+### Prerequisites
 
-## Project structure
-```
-app/               # App Router, API routes under app/api/*
-data/              # JSON datasets and suggestion storage
-lib/               # Data services, validation schemas, helpers
-types/             # Re-exported TypeScript types for consumers
-```
+- Node.js 18+ 
+- npm or yarn
 
-## Getting started
+### Installation
+
+1. Install dependencies:
 ```bash
 npm install
+```
+
+2. Create a `.env` file in the root directory with the following variables:
+
+```env
+### Add-on Prices
+ADDON_PIA_PRICE=1500
+ADDON_VA_PRICE=2000
+ADDON_UAT_PRICE=2500
+ADDON_SEO_PRICE=3000
+ADDON_ADMIN_DASH_PRICE=5000
+ADDON_API_PRICE=5000
+ADDON_UIUX_PRICE=4000
+
+### Hosting
+ADDON_HOSTING_SHARED=2000
+ADDON_HOSTING_VPS=4500
+ADDON_HOSTING_CLOUD=8000
+
+### Domain
+ADDON_DOMAIN_COM=800
+ADDON_DOMAIN_PH=1500
+ADDON_DOMAIN_ORG=1000
+
+### Maintenance
+MAINTENANCE_MONTHLY=1500
+MAINTENANCE_YEARLY=10000
+
+### Base Website Prices
+BASE_PORTFOLIO_PRICE=5000
+BASE_BLOG_PRICE=6000
+BASE_ECOMMERCE_PRICE=12000
+BASE_COMPANY_PRICE=8000
+BASE_CUSTOM_PRICE=15000
+
+### Complexity Multipliers
+COMPLEXITY_BASIC=1
+COMPLEXITY_STANDARD=1.5
+COMPLEXITY_ADVANCED=2
+
+### Timeline
+RUSH_MULTIPLIER=1.5
+```
+
+3. Run the development server:
+```bash
 npm run dev
 ```
 
-Visit `http://localhost:3000/api/psgc` to confirm the API is online. All routes are fully typed, validated, and return JSON.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Deploying to Vercel
-1. Install the Vercel CLI: `npm i -g vercel`
-2. Run `vercel init` inside this folder (or import the repo in the Vercel dashboard).
-3. `vercel dev` for local testing with Vercel environment.
-4. `vercel --prod` to deploy. No build settings need to be changed; the defaults (`npm run build`) work out of the box.
+## 📁 Project Structure
 
-## Example requests
-```bash
-# Fetch every PSGC node
-curl https://your-vercel-domain.vercel.app/api/psgc
-
-# Fetch general reference values
-curl https://your-vercel-domain.vercel.app/api/reference
-
-# Submit a dataset suggestion
-curl -X POST https://your-vercel-domain.vercel.app/api/suggestions \
-  -H "Content-Type: application/json" \
-  -d '{"type":"dataset","message":"Please add PhilHealth branch list","contact":"you@example.com"}'
+```
+WebValuator/
+├── app/
+│   ├── api/
+│   │   └── calculate/
+│   │       └── route.ts          # API route for cost calculation
+│   ├── components/
+│   │   ├── EstimatorForm.tsx    # Main form component
+│   │   └── ResultCard.tsx       # Results display component
+│   ├── lib/
+│   │   ├── costCalculator.ts    # Cost calculation logic
+│   │   └── types.ts             # TypeScript types and Zod schemas
+│   ├── globals.css               # Global styles
+│   ├── layout.tsx                # Root layout
+│   └── page.tsx                  # Main page
+├── components/
+│   └── ui/                       # Shadcn UI components
+├── lib/
+│   └── utils.ts                  # Utility functions
+└── package.json
 ```
 
-## Migrating to a real database
-- Replace the helpers in `/lib/*-service.ts` with DB queries (Prisma, Drizzle, Supabase, etc.).
-- Swap `/lib/suggestion-store.ts` with your preferred data layer while retaining the same interface (`addSuggestion`, `readSuggestions`).
-- Keep Zod schemas as the single source of truth so route handlers and future clients stay type-safe.
+## ✨ Features
 
-"# dev-na-api" 
+- ✅ All pricing values loaded from environment variables
+- ✅ Zod validation for form inputs
+- ✅ Responsive mobile-first design
+- ✅ Shadcn UI components
+- ✅ TypeScript for type safety
+- ✅ Server-side cost calculation via API route
+- ✅ Detailed cost breakdown display
+- ✅ PDF estimate generation (placeholder)
+
+## 🧮 Cost Calculation
+
+The cost calculator:
+1. Loads base prices from `.env` variables
+2. Applies complexity multipliers
+3. Adds selected add-ons
+4. Includes hosting, domain & maintenance costs
+5. Applies rush multiplier if selected
+6. Returns detailed breakdown with total
+
+## 🚢 Deployment
+
+This project is ready to deploy on Vercel. Make sure to add all environment variables in your Vercel project settings.
+
+## 📝 License
+
+MIT

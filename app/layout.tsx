@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "developer-na-api",
-  description: "Structured Philippine developer data API",
+  title: "WebValuator",
+  description: "Generate an accurate cost estimate for your website project",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -14,4 +14,3 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
-
