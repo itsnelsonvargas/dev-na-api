@@ -23,7 +23,6 @@ const addonLabels: Record<Addon, string> = {
   uat: "User Acceptance Testing (UAT)",
   seo: "SEO Setup",
   adminDash: "Admin Dashboard",
-  api: "API Integration",
   uiux: "UI/UX Designer Included",
 };
 
@@ -42,7 +41,47 @@ export function EstimatorForm({ onCalculate }: EstimatorFormProps) {
     maintenance: "none",
     timeline: "normal",
     database: "none",
+    apiIntegration: false,
+    apiDocumentation: "none",
   });
+
+  // Handle database change - disable API integration if no database
+  const handleDatabaseChange = (database: EstimatorFormData["database"]) => {
+    let newApiIntegration = formData.apiIntegration;
+    let newApiDocumentation = formData.apiDocumentation;
+
+    if (database === "none") {
+      newApiIntegration = false;
+      newApiDocumentation = "none";
+    } else {
+      // Set default API documentation based on database tier
+      if (newApiDocumentation === "none" && database !== "none") {
+        if (database === "basic" || database === "standard") {
+          newApiDocumentation = "basic";
+        } else if (database === "advanced") {
+          newApiDocumentation = "advanced";
+        } else if (database === "enterprise") {
+          newApiDocumentation = "enterprise";
+        }
+      }
+    }
+
+    setFormData({
+      ...formData,
+      database,
+      apiIntegration: newApiIntegration,
+      apiDocumentation: newApiDocumentation,
+    });
+  };
+
+  // Get available API documentation options based on database
+  const getApiDocumentationOptions = () => {
+    const database = formData.database || "none";
+    if (database === "none") return ["none"];
+    if (database === "basic" || database === "standard") return ["none", "basic"];
+    if (database === "advanced") return ["none", "basic", "advanced"];
+    return ["none", "basic", "advanced", "enterprise"];
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -271,10 +310,7 @@ export function EstimatorForm({ onCalculate }: EstimatorFormProps) {
             <Select
               value={formData.database}
               onValueChange={(value) =>
-                setFormData({
-                  ...formData,
-                  database: value as EstimatorFormData["database"],
-                })
+                handleDatabaseChange(value as EstimatorFormData["database"])
               }
             >
               <SelectTrigger id="database">
@@ -289,6 +325,65 @@ export function EstimatorForm({ onCalculate }: EstimatorFormProps) {
               </SelectContent>
             </Select>
           </div>
+
+          {/* API Integration */}
+          {(formData.database || "none") !== "none" && (
+            <div className="space-y-3">
+              <Label>API Integration</Label>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="apiIntegration"
+                  checked={formData.apiIntegration || false}
+                  onCheckedChange={(checked) =>
+                    setFormData({
+                      ...formData,
+                      apiIntegration: checked as boolean,
+                      apiDocumentation: checked ? formData.apiDocumentation : "none",
+                    })
+                  }
+                />
+                <Label
+                  htmlFor="apiIntegration"
+                  className="text-sm font-normal cursor-pointer"
+                >
+                  Include API Integration
+                </Label>
+              </div>
+            </div>
+          )}
+
+          {/* API Documentation */}
+          {(formData.database || "none") !== "none" && (
+            <div className="space-y-2">
+              <Label htmlFor="apiDocumentation">API Documentation</Label>
+              <Select
+                value={formData.apiDocumentation}
+                onValueChange={(value) =>
+                  setFormData({
+                    ...formData,
+                    apiDocumentation: value as EstimatorFormData["apiDocumentation"],
+                  })
+                }
+              >
+                <SelectTrigger id="apiDocumentation">
+                  <SelectValue placeholder="Select API documentation level" />
+                </SelectTrigger>
+                <SelectContent>
+                  {getApiDocumentationOptions().map((option) => (
+                    <SelectItem key={option} value={option}>
+                      {option === "none"
+                        ? "No Documentation"
+                        : option === "basic"
+                        ? "Basic Documentation"
+                        : option === "advanced"
+                        ? "Advanced Documentation"
+                        : "Enterprise Documentation"}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
 
           <Button type="submit" className="w-full">
             Calculate Estimate

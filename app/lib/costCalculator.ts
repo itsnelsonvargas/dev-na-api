@@ -93,6 +93,19 @@ export function calculateCost(data: EstimatorFormData): CostCalculationResult {
 
   const database = databasePrices[data.database];
 
+  // API Integration
+  const apiIntegrationPrice = data.apiIntegration ? getEnvNumber("ADDON_API_INTEGRATION", 5000) : 0;
+
+  // API Documentation
+  const apiDocumentationPrices: Record<EstimatorFormData["apiDocumentation"], number> = {
+    none: 0,
+    basic: getEnvNumber("API_DOCUMENTATION_BASIC", 1000),
+    advanced: getEnvNumber("API_DOCUMENTATION_ADVANCED", 2500),
+    enterprise: getEnvNumber("API_DOCUMENTATION_ENTERPRISE", 5000),
+  };
+
+  const apiDocumentation = apiDocumentationPrices[data.apiDocumentation];
+
   // Timeline multiplier
   const timelineMultipliers: Record<EstimatorFormData["timeline"], number> = {
     flexible: 1,
@@ -104,7 +117,7 @@ export function calculateCost(data: EstimatorFormData): CostCalculationResult {
 
   // Calculate total
   const subtotal =
-    baseCost * complexityMultiplier + addonsTotal + hosting + domain + maintenance + database;
+    baseCost * complexityMultiplier + addonsTotal + hosting + domain + maintenance + database + apiIntegrationPrice + apiDocumentation;
   const total = subtotal * timelineMultiplier;
 
   const breakdown: CostBreakdown = {
@@ -115,6 +128,8 @@ export function calculateCost(data: EstimatorFormData): CostCalculationResult {
     ...(domain > 0 && { domain }),
     ...(maintenance > 0 && { maintenance }),
     ...(database > 0 && { database }),
+    ...(apiIntegrationPrice > 0 && { apiIntegration: apiIntegrationPrice }),
+    ...(apiDocumentation > 0 && { apiDocumentation }),
     timelineMultiplier,
   };
 

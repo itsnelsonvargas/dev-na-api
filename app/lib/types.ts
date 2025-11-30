@@ -24,11 +24,12 @@ export const addonSchema = z.enum([
   "uat",
   "seo",
   "adminDash",
-  "api",
   "uiux",
 ]);
 
 export const databaseSchema = z.enum(["none", "basic", "standard", "advanced", "enterprise"]);
+
+export const apiDocumentationSchema = z.enum(["none", "basic", "advanced", "enterprise"]);
 
 export const estimatorFormSchema = z.object({
   websiteType: websiteTypeSchema,
@@ -40,6 +41,8 @@ export const estimatorFormSchema = z.object({
   maintenance: maintenanceSchema,
   timeline: timelineSchema,
   database: databaseSchema,
+  apiIntegration: z.boolean(),
+  apiDocumentation: apiDocumentationSchema,
 });
 
 export type WebsiteType = z.infer<typeof websiteTypeSchema>;
@@ -50,6 +53,7 @@ export type Maintenance = z.infer<typeof maintenanceSchema>;
 export type Timeline = z.infer<typeof timelineSchema>;
 export type Addon = z.infer<typeof addonSchema>;
 export type Database = z.infer<typeof databaseSchema>;
+export type ApiDocumentation = z.infer<typeof apiDocumentationSchema>;
 export type EstimatorFormData = z.infer<typeof estimatorFormSchema>;
 
 export interface CostBreakdown {
@@ -60,6 +64,8 @@ export interface CostBreakdown {
   domain?: number;
   maintenance?: number;
   database?: number;
+  apiIntegration?: number;
+  apiDocumentation?: number;
   timelineMultiplier: number;
 }
 

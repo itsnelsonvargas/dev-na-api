@@ -34,7 +34,9 @@ export function ResultCard({ result }: ResultCardProps) {
     (result.breakdown.hosting || 0) +
     (result.breakdown.domain || 0) +
     (result.breakdown.maintenance || 0) +
-    (result.breakdown.database || 0);
+    (result.breakdown.database || 0) +
+    (result.breakdown.apiIntegration || 0) +
+    (result.breakdown.apiDocumentation || 0);
 
   return (
     <Card>
@@ -109,6 +111,22 @@ export function ResultCard({ result }: ResultCardProps) {
             <div className="flex justify-between text-sm">
               <span>Database</span>
               <span>{formatCurrency(result.breakdown.database)}</span>
+            </div>
+          )}
+
+          {/* API Integration */}
+          {result.breakdown.apiIntegration && (
+            <div className="flex justify-between text-sm">
+              <span>API Integration</span>
+              <span>{formatCurrency(result.breakdown.apiIntegration)}</span>
+            </div>
+          )}
+
+          {/* API Documentation */}
+          {result.breakdown.apiDocumentation && (
+            <div className="flex justify-between text-sm">
+              <span>API Documentation</span>
+              <span>{formatCurrency(result.breakdown.apiDocumentation)}</span>
             </div>
           )}
 
