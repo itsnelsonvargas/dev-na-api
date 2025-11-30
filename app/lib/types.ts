@@ -28,6 +28,8 @@ export const addonSchema = z.enum([
   "uiux",
 ]);
 
+export const databaseSchema = z.enum(["none", "basic", "standard", "advanced", "enterprise"]);
+
 export const estimatorFormSchema = z.object({
   websiteType: websiteTypeSchema,
   numberOfPages: z.number().min(1, "Number of pages must be at least 1"),
@@ -37,6 +39,7 @@ export const estimatorFormSchema = z.object({
   domain: domainSchema,
   maintenance: maintenanceSchema,
   timeline: timelineSchema,
+  database: databaseSchema,
 });
 
 export type WebsiteType = z.infer<typeof websiteTypeSchema>;
@@ -46,6 +49,7 @@ export type Domain = z.infer<typeof domainSchema>;
 export type Maintenance = z.infer<typeof maintenanceSchema>;
 export type Timeline = z.infer<typeof timelineSchema>;
 export type Addon = z.infer<typeof addonSchema>;
+export type Database = z.infer<typeof databaseSchema>;
 export type EstimatorFormData = z.infer<typeof estimatorFormSchema>;
 
 export interface CostBreakdown {
@@ -55,6 +59,7 @@ export interface CostBreakdown {
   hosting?: number;
   domain?: number;
   maintenance?: number;
+  database?: number;
   timelineMultiplier: number;
 }
 

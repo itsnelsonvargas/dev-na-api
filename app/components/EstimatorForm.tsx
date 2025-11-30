@@ -41,6 +41,7 @@ export function EstimatorForm({ onCalculate }: EstimatorFormProps) {
     domain: "none",
     maintenance: "none",
     timeline: "normal",
+    database: "none",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -260,6 +261,31 @@ export function EstimatorForm({ onCalculate }: EstimatorFormProps) {
                 <SelectItem value="flexible">Flexible (1x)</SelectItem>
                 <SelectItem value="normal">Normal (1x)</SelectItem>
                 <SelectItem value="rush">Rush</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Database */}
+          <div className="space-y-2">
+            <Label htmlFor="database">Database Options</Label>
+            <Select
+              value={formData.database}
+              onValueChange={(value) =>
+                setFormData({
+                  ...formData,
+                  database: value as EstimatorFormData["database"],
+                })
+              }
+            >
+              <SelectTrigger id="database">
+                <SelectValue placeholder="Select database option" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">No Database</SelectItem>
+                <SelectItem value="basic">Basic Database</SelectItem>
+                <SelectItem value="standard">Standard Database</SelectItem>
+                <SelectItem value="advanced">Advanced Database</SelectItem>
+                <SelectItem value="enterprise">Enterprise Database</SelectItem>
               </SelectContent>
             </Select>
           </div>

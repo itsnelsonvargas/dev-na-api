@@ -33,7 +33,8 @@ export function ResultCard({ result }: ResultCardProps) {
     Object.values(result.breakdown.addons).reduce((sum, price) => sum + price, 0) +
     (result.breakdown.hosting || 0) +
     (result.breakdown.domain || 0) +
-    (result.breakdown.maintenance || 0);
+    (result.breakdown.maintenance || 0) +
+    (result.breakdown.database || 0);
 
   return (
     <Card>
@@ -100,6 +101,14 @@ export function ResultCard({ result }: ResultCardProps) {
             <div className="flex justify-between text-sm">
               <span>Maintenance</span>
               <span>{formatCurrency(result.breakdown.maintenance)}</span>
+            </div>
+          )}
+
+          {/* Database */}
+          {result.breakdown.database && (
+            <div className="flex justify-between text-sm">
+              <span>Database</span>
+              <span>{formatCurrency(result.breakdown.database)}</span>
             </div>
           )}
 

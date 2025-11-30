@@ -82,6 +82,17 @@ export function calculateCost(data: EstimatorFormData): CostCalculationResult {
 
   const maintenance = maintenancePrices[data.maintenance];
 
+  // Database
+  const databasePrices: Record<EstimatorFormData["database"], number> = {
+    none: 0,
+    basic: getEnvNumber("DATABASE_BASIC", 2000),
+    standard: getEnvNumber("DATABASE_STANDARD", 5000),
+    advanced: getEnvNumber("DATABASE_ADVANCED", 8000),
+    enterprise: getEnvNumber("DATABASE_ENTERPRISE", 15000),
+  };
+
+  const database = databasePrices[data.database];
+
   // Timeline multiplier
   const timelineMultipliers: Record<EstimatorFormData["timeline"], number> = {
     flexible: 1,
@@ -93,7 +104,7 @@ export function calculateCost(data: EstimatorFormData): CostCalculationResult {
 
   // Calculate total
   const subtotal =
-    baseCost * complexityMultiplier + addonsTotal + hosting + domain + maintenance;
+    baseCost * complexityMultiplier + addonsTotal + hosting + domain + maintenance + database;
   const total = subtotal * timelineMultiplier;
 
   const breakdown: CostBreakdown = {
@@ -103,6 +114,7 @@ export function calculateCost(data: EstimatorFormData): CostCalculationResult {
     ...(hosting > 0 && { hosting }),
     ...(domain > 0 && { domain }),
     ...(maintenance > 0 && { maintenance }),
+    ...(database > 0 && { database }),
     timelineMultiplier,
   };
 
